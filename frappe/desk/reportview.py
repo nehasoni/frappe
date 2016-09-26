@@ -157,6 +157,14 @@ def get_stats(stats, doctype):
 
 	return stats
 
+@frappe.whitelist()
+def get_count(doctype, filters):
+
+	totalcount = execute(doctype, fields=["count(*) as total_count "],
+			filters=filters)
+
+	return totalcount
+
 def scrub_user_tags(tagcount):
 	"""rebuild tag list for tags"""
 	rdict = {}
